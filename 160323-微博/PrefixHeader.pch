@@ -21,6 +21,10 @@
 #define WJLog(...)
 #endif
 
-
+/**
+ *  <#Description#>
+ *
+ *  @return <#return value description#>
+ */
 
 #define kTitleFont [UIFont systemFontOfSize:15]
