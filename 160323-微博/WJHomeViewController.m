@@ -17,10 +17,12 @@
 #import "WJUser.h"
 #import "UIImageView+WebCache.h"
 #import "WJLoadMoreFootView.h"
+#import "WJStatusCell.h"
 
 @interface WJHomeViewController () <WJDropdownMenuDelegate>
 @property (nonatomic, weak) WJTitleButton *titleBtn;
 @property (nonatomic, strong) NSMutableArray *statusArray;
+@property (nonatomic, assign) BOOL noMore;
 @end
 
 @implementation WJHomeViewController
@@ -80,9 +82,10 @@ static WJAccount *account;
         //https://api.weibo.com/2/statuses/friends_timeline.json //好友微博
         [manager GET:@"https://api.weibo.com/2/statuses/public_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
             //返回的字典数组 转为 模型数组
-            NSArray *moreStatuses = [WJStatus objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+            NSArray *moreStatuses = [WJStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
             WJLog(@"-------newCount-------%d", moreStatuses.count);
             if (moreStatuses.count == 0) {//如果没有新数据则直接return
+                self.noMore = YES;
                 return ;
             }
             //插入到当前数组之后
@@ -117,29 +120,29 @@ static WJAccount *account;
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSMutableDictionary *params = [NSMutableDictionary dictionary];
     params[@"access_token"] = account.access_token;
-    if ([[self.statusArray firstObject] idstr] != nil) {
-        params[@"since_id"] = [[self.statusArray firstObject] idstr];
-    }
-    WJLog(@"-------idstr-------%@", [[self.statusArray firstObject] idstr]);
- 
+    //请求好友微博时需要这个参数  公共微博只需要access token
+//    if ([[self.statusArray firstObject] idstr] != nil) {
+//        params[@"since_id"] = [[self.statusArray firstObject] idstr];
+//    }
+    @synchronized(self) {
         
-    [manager GET:@"https://api.weibo.com/2/statuses/friends_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
-        //返回的字典数组 转为 模型数组
-        NSArray *newStatuses = [WJStatus objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-        WJLog(@"-------new-------%@", newStatuses);
-        if (newStatuses == nil) {
-            return ;
-        }
-        //插入到当前数组之前
-        [self.statusArray insertObjects:newStatuses atIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange(0, newStatuses.count)]];
-        [self.tableView reloadData];
-        WJLog(@"-------count-------%d", self.statusArray.count);
-        [control endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        WJLog(@"-------REFRESH_STATE_FAILSE-------%@", error);
-        [control endRefreshing];
-    }];
-    
+        [manager GET:@"https://api.weibo.com/2/statuses/public_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+            //返回的字典数组 转为 模型数组
+            NSArray *newStatuses = [WJStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
+            WJLog(@"-------newStatuses-------%@", [WJStatus mj_keyValuesArrayWithObjectArray:newStatuses]);
+            if (newStatuses == nil) {
+                return ;
+            }
+            //插入到当前数组之前
+            [self.statusArray insertObjects:newStatuses atIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange(0, newStatuses.count)]];
+            [self.tableView reloadData];
+            WJLog(@"-------count-------%d", self.statusArray.count);
+            [control endRefreshing];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            WJLog(@"-------REFRESH_STATE_FAILSE-------%@", error);
+            [control endRefreshing];
+        }];
+    }
     
 }
 
@@ -221,24 +224,21 @@ static WJAccount *account;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *ID = @"status";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:ID];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:ID];
-    }
+    WJStatusCell *cell = [WJStatusCell cellWithTableView:tableView];
+   
+    //设置模型
     WJStatus *status = self.statusArray[indexPath.row];
-    cell.textLabel.text = status.user.name;
-    cell.detailTextLabel.text = status.text;
-    NSURL *imageUrl = [NSURL URLWithString:status.user.profile_image_url];
-    [cell.imageView sd_setImageWithURL:imageUrl placeholderImage:[UIImage imageNamed:@"avatar_default_small"]];
     
-    if (indexPath.row == self.statusArray.count - 1) {//说明是最后一个 加载更多 并显示那个footView
+    cell.status = status;
+    if (indexPath.row == self.statusArray.count - 1 && !self.noMore) {//说明是最后一个 加载更多 并显示那个footView
         [self loadMoreStatus];
     }
     
     return cell;
 }
 
-
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return [self.statusArray[indexPath.row] cellHeight];
+}
 
 @end
