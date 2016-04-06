@@ -41,6 +41,7 @@ static WJAccount *account;
    //test
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(loadMoreStatus)];
     //test
+    
     self.tableView = [[UITableView alloc] initWithFrame:CGRectZero style:UITableViewStyleGrouped];
 //    [self.tableView setValue:UITableViewStylePlain forKey:@"style"];
     account = [WJAccountTool account];
@@ -226,6 +227,7 @@ static WJAccount *account;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     WJStatusCell *cell = [WJStatusCell cellWithTableView:tableView];
    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     //设置模型
     WJStatus *status = self.statusArray[indexPath.row];
     

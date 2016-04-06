@@ -19,17 +19,18 @@
     
     UIBarButtonItem *item = [UIBarButtonItem appearance];
     
+    //设置不可用状态
+    NSMutableDictionary *disableAttrs = [NSMutableDictionary dictionary];
+    disableAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
+    disableAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:13];
+    [item setTitleTextAttributes:disableAttrs forState:UIControlStateDisabled];
     //设置普通状态
     NSMutableDictionary *attrs = [NSMutableDictionary dictionary];
     attrs[NSForegroundColorAttributeName] = [UIColor orangeColor];
     attrs[NSFontAttributeName] = [UIFont systemFontOfSize:13];
     [item setTitleTextAttributes:attrs forState:UIControlStateNormal];
     
-    //设置不可用状态
-    NSMutableDictionary *disableAttrs = [NSMutableDictionary dictionary];
-    disableAttrs[NSForegroundColorAttributeName] = [UIColor grayColor];
-    disableAttrs[NSFontAttributeName] = [UIFont systemFontOfSize:13];
-    [item setTitleTextAttributes:disableAttrs forState:UIControlStateDisabled];
+  
     
 }
 

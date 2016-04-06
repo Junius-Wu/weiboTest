@@ -71,8 +71,13 @@
     self.contentLabel.text = self.status.text;
     //图片内容
     self.photoView.frame = self.status.photoViewF;
-    //[self.photoView sd_setImageWithURL:[NSURL URLWithString:self.status.pic_urls[0][@"thumbnail_pic"]] placeholderImage:nil];
     
+    if (self.status.pic_urls.count != 0) {
+        NSDictionary *dict = self.status.pic_urls[0];
+        NSURL *photoUrl = [NSURL URLWithString: dict[@"thumbnail_pic"] ];
+        [self.photoView sd_setImageWithURL:photoUrl placeholderImage:[UIImage imageNamed:@"d_heixian"]];
+    }
+   
 }
 
 /**
@@ -83,7 +88,6 @@
         //添加原创
         UIView *originalView = [[UIView alloc] init];
         self.originalView = originalView;
-        [self.originalView setBackgroundColor:[UIColor greenColor]];
         [self.contentView addSubview:originalView];
         //头像
         UIImageView *iconView = [[UIImageView alloc] init];

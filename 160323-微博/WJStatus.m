@@ -74,11 +74,19 @@
     WJLog(@"-------size-------%f, %f", contentSize.width    ,contentSize.height);
     self.contentLabelF = CGRectMake(contentX, contentY, contentSize.width, contentSize.height);
     
+    //图片
+    if (self.pic_urls.count != 0) {//说明有图
+        CGFloat photoX = contentX;
+        CGFloat photoY = CGRectGetMaxY(self.contentLabelF) + WJStatusCellBorderW;
+        self.photoViewF = CGRectMake(photoX, photoY, 100, 100);
+        
+        self.originalViewF = CGRectMake(0, 0, screenSize.width, CGRectGetMaxY(self.photoViewF));
+        self.cellHeight = CGRectGetMaxY(self.photoViewF);
+    } else {
+        self.originalViewF = CGRectMake(0, 0, screenSize.width, CGRectGetMaxY(self.contentLabelF));
+        self.cellHeight = CGRectGetMaxY(self.contentLabelF);
+    }
     
-    
-    
-    self.originalViewF = CGRectMake(0, 0, 320 , 320);
-    self.cellHeight = 320;
     
 }
 

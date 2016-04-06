@@ -13,9 +13,9 @@
 #import "WJDiscoverViewController.h"
 #import "WJNavigationController.h"
 #import "WJTabBarWithPlusBtn.h"
+#import "WJComposeController.h"
 
 @interface WJTabBarController () <WJTabBarWithPlusBtnDelegate>
-
 @end
 
 @implementation WJTabBarController
@@ -39,9 +39,11 @@
 }
 
 -(void)tabBarDidClickPlusButton {
-    UIViewController *vc = [[UIViewController alloc] init];
-    [vc.view setBackgroundColor:[UIColor redColor]];
-    [self presentViewController:vc animated:YES completion:nil];
+    WJComposeController *vc = [[WJComposeController alloc] init];
+    [vc.view setBackgroundColor:[UIColor grayColor]];
+    WJNavigationController *nav = [[WJNavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:nil];
+    
 }
 
 /**

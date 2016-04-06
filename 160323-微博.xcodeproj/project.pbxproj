@@ -12,6 +12,7 @@
 		BF33A7AD1CAA5F6D00866541 /* UIWindow+WJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = BF33A7AC1CAA5F6D00866541 /* UIWindow+WJExtension.m */; };
 		BF6F8FFD1CABA5A300BCC3C4 /* WJLoadMoreFootView.m in Sources */ = {isa = PBXBuildFile; fileRef = BF6F8FFC1CABA5A300BCC3C4 /* WJLoadMoreFootView.m */; };
 		BF6F8FFF1CABA5D100BCC3C4 /* WJLoadMoreFootView.xib in Resources */ = {isa = PBXBuildFile; fileRef = BF6F8FFE1CABA5D100BCC3C4 /* WJLoadMoreFootView.xib */; };
+		BF78EFFA1CB5402B0090FDD3 /* WJComposeController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF78EFF91CB5402B0090FDD3 /* WJComposeController.m */; };
 		BF7F94821CA2B9790053CAA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F94811CA2B9790053CAA8 /* main.m */; };
 		BF7F94851CA2B9790053CAA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BF7F94841CA2B9790053CAA8 /* AppDelegate.m */; };
 		BF7F948D1CA2B9790053CAA8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BF7F948C1CA2B9790053CAA8 /* Assets.xcassets */; };
@@ -103,6 +104,8 @@
 		BF6F8FFB1CABA5A300BCC3C4 /* WJLoadMoreFootView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJLoadMoreFootView.h; sourceTree = "<group>"; };
 		BF6F8FFC1CABA5A300BCC3C4 /* WJLoadMoreFootView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJLoadMoreFootView.m; sourceTree = "<group>"; };
 		BF6F8FFE1CABA5D100BCC3C4 /* WJLoadMoreFootView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WJLoadMoreFootView.xib; sourceTree = "<group>"; };
+		BF78EFF81CB5402B0090FDD3 /* WJComposeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WJComposeController.h; sourceTree = "<group>"; };
+		BF78EFF91CB5402B0090FDD3 /* WJComposeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WJComposeController.m; sourceTree = "<group>"; };
 		BF7F947D1CA2B9790053CAA8 /* 160323-微博.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "160323-微博.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF7F94811CA2B9790053CAA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		BF7F94831CA2B9790053CAA8 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -294,6 +297,23 @@
 			name = Controller;
 			sourceTree = "<group>";
 		};
+		BF78EFF61CB53FFA0090FDD3 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				BF78EFF71CB5400A0090FDD3 /* Controller */,
+			);
+			name = Compose;
+			sourceTree = "<group>";
+		};
+		BF78EFF71CB5400A0090FDD3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BF78EFF81CB5402B0090FDD3 /* WJComposeController.h */,
+				BF78EFF91CB5402B0090FDD3 /* WJComposeController.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
 		BF7F94741CA2B9790053CAA8 = {
 			isa = PBXGroup;
 			children = (
@@ -358,6 +378,7 @@
 		BF7F94B31CA2BBE10053CAA8 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				BF78EFF61CB53FFA0090FDD3 /* Compose */,
 				BFFB47D31CA64CCD00559A5F /* NewFeatrue */,
 				BF9C3E4D1CA57F6300F6D0D3 /* OAuth */,
 				BF9C3E4C1CA57F5900F6D0D3 /* Profile */,
@@ -824,6 +845,7 @@
 				BFBC67F01CAAC37300759753 /* AFHTTPRequestOperationManager.m in Sources */,
 				BFBC67F51CAAC37300759753 /* AFURLRequestSerialization.m in Sources */,
 				BF7F94BD1CA2BE6B0053CAA8 /* WJMessageViewController.m in Sources */,
+				BF78EFFA1CB5402B0090FDD3 /* WJComposeController.m in Sources */,
 				BFBC67961CAAB70A00759753 /* WJUser.m in Sources */,
 				BFFB47D61CA64D0100559A5F /* WJNewFeatureController.m in Sources */,
 				BFBC680C1CAAC37300759753 /* SDWebImageDownloaderOperation.m in Sources */,
