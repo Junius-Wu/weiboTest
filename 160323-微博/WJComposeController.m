@@ -32,6 +32,9 @@
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
 
+    /**
+     *  ssds
+     */
     //奇怪的问题 ，把这句放在viewdidLoad中就没有主题效果
     self.navigationItem.rightBarButtonItem.enabled = NO;
 }
