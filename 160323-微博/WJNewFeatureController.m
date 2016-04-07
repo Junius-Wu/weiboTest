@@ -46,7 +46,6 @@
             
         }
     }
-    WJLog(@"-------xxx-------%@", scrollView.subviews);
     [self.view addSubview:scrollView];
     
     UIPageControl *pageControl = [[UIPageControl alloc] initWithFrame:CGRectMake([UIScreen mainScreen].bounds.size.width / 2.0, [UIScreen mainScreen].bounds.size.height * 9.0 / 10.0 , 0, 0)];
@@ -65,12 +64,10 @@
 }
 
 -(void)dealloc {
-    WJLog(@"-------newFeature dealloc-------");
 }
 //代理方法 监听滚动
 -(void)scrollViewDidScroll:(UIScrollView *)scrollView {
     double page = scrollView.contentOffset.x / scrollView.width;
-    WJLog(@"-------page-------%d", self.pagecontrol.currentPage);
     self.pagecontrol.currentPage = (int)(page + 0.5);
     
 }

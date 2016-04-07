@@ -84,9 +84,10 @@ static WJAccount *account;
         [manager GET:@"https://api.weibo.com/2/statuses/public_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
             //返回的字典数组 转为 模型数组
             NSArray *moreStatuses = [WJStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-            WJLog(@"-------newCount-------%d", moreStatuses.count);
             if (moreStatuses.count == 0) {//如果没有新数据则直接return
                 self.noMore = YES;
+                WJLog(@"------count-------%d", moreStatuses.count);
+                
                 return ;
             }
             //插入到当前数组之后
@@ -130,14 +131,12 @@ static WJAccount *account;
         [manager GET:@"https://api.weibo.com/2/statuses/public_timeline.json" parameters:params success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
             //返回的字典数组 转为 模型数组
             NSArray *newStatuses = [WJStatus mj_objectArrayWithKeyValuesArray:responseObject[@"statuses"]];
-            WJLog(@"-------newStatuses-------%@", [WJStatus mj_keyValuesArrayWithObjectArray:newStatuses]);
             if (newStatuses == nil) {
                 return ;
             }
             //插入到当前数组之前
             [self.statusArray insertObjects:newStatuses atIndexes:[NSIndexSet indexSetWithIndexesInRange: NSMakeRange(0, newStatuses.count)]];
             [self.tableView reloadData];
-            WJLog(@"-------count-------%d", self.statusArray.count);
             [control endRefreshing];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             WJLog(@"-------REFRESH_STATE_FAILSE-------%@", error);
@@ -174,7 +173,6 @@ static WJAccount *account;
         account.name = responseObject[@"name"];
         //保存模型
         [WJAccountTool saveAccount:account];
-        WJLog(@"-------name-------%@", account.name);
         
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         WJLog(@"-------GET_USERINFO_FAILSE-------%@", error);

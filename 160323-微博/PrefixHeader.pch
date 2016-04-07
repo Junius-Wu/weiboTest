@@ -15,16 +15,12 @@
 #endif /* PrefixHeader_pch */
 
 
+
 #ifdef DEBUG // 处于开发阶段
 #define WJLog(...) NSLog(__VA_ARGS__)
 #else // 处于发布阶段
 #define WJLog(...)
 #endif
 
-/**
- *  <#Description#>
- *
- *  @return <#return value description#>
- */
 
 #define kTitleFont [UIFont systemFontOfSize:15]

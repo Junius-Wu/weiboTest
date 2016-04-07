@@ -71,8 +71,7 @@
     CGFloat contentX = iconX;
     CGFloat contentY = WJStatusCellBorderW * 2 + WJStatusCellIconWH;
     CGSize contentSize = [self sizeWithText:self.text font:WJStatusCellContentFont maxSize:CGSizeMake(screenSize.width - 2 * WJStatusCellBorderW, MAXFLOAT)];
-    WJLog(@"-------size-------%f, %f", contentSize.width    ,contentSize.height);
-    self.contentLabelF = CGRectMake(contentX, contentY, contentSize.width, contentSize.height);
+     self.contentLabelF = CGRectMake(contentX, contentY, contentSize.width, contentSize.height);
     
     //图片
     if (self.pic_urls.count != 0) {//说明有图

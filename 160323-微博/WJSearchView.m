@@ -14,7 +14,7 @@
 
 + (WJSearchView *)searchViewWithSize:(CGSize)size {
     WJSearchView *searchView = [[WJSearchView alloc] init];
-    WJLog(@"-------test-------");
+    
     searchView.size = size;
     searchView.placeholder = @"请输入搜索条件";
     searchView.font = [UIFont systemFontOfSize:13];

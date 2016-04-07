@@ -40,7 +40,6 @@
     NSURL *url = request.URL.absoluteURL;
     NSString *strURL = [url absoluteString];
     
-    WJLog(@"-------a-------%@", strURL);
     NSRange range = [strURL rangeOfString:@"code="];
     if (range.length != 0) {
         int fromIndex = range.location;
@@ -83,7 +82,6 @@
 
 
 -(void)dealloc {
-    WJLog(@"-------OAuthController dealloc-------");
 }
 
 - (void)didReceiveMemoryWarning {

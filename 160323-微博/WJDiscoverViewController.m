@@ -19,7 +19,7 @@
     [super viewDidLoad];
     
     
-    WJSearchView *searchView = [WJSearchView searchViewWithSize:CGSizeMake(250, 30)];
+    WJSearchView *searchView = [WJSearchView searchViewWithSize:CGSizeMake(300, 30)];
     self.navigationItem.titleView = searchView;
 }
 

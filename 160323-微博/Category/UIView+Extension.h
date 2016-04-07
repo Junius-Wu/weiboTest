@@ -5,7 +5,7 @@
 //
 //  Created by apple on 14-10-7.
 //  Copyright (c) 2014年 heima. All rights reserved.
-//
+//  快速设置UIView的各个属性
 
 #import <UIKit/UIKit.h>
 
